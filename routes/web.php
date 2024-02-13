@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,16 +17,21 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+}); */
 
-Route::get('/dashboard', function () {
+Route::get('/', [ClientController::class, 'home']);
+Route::get('/shop', [ClientController::class, 'shop'])->name('shop');
+Route::get('/cart', [ClientController::class, 'cart'])->name('cart');
+Route::get('/checkout', [ClientController::class, 'checkout'])->name('checkout');
+
+/* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -35,4 +41,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__.'/auth.php'; */
