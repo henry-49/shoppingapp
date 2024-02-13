@@ -30,6 +30,8 @@ Route::get('/', [ClientController::class, 'home']);
 Route::get('/shop', [ClientController::class, 'shop'])->name('shop');
 Route::get('/cart', [ClientController::class, 'cart'])->name('cart');
 Route::get('/checkout', [ClientController::class, 'checkout'])->name('checkout');
+Route::get('/login', [ClientController::class, 'login'])->name('login');
+Route::get('/signup', [ClientController::class, 'signup'])->name('signup');
 
 /* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
