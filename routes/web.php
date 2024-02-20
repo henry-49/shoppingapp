@@ -32,8 +32,12 @@ use Inertia\Inertia;
 
 Route::get('/admin', [AdminController::class, 'admin']);
 
-Route::get('/addcategory', [CategoryController::class, 'addcategory']);
-Route::get('/categories', [CategoryController::class, 'categories']);
+Route::get('/addcategory', [CategoryController::class, 'addcategory'])->name('addcategory');
+Route::post('/savecategory', [CategoryController::class, 'savecategory'])->name('savecategory');
+Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
+Route::get('/edit_category/{id}', [CategoryController::class, 'editcategory'])->name('editcategory');
+Route::post('/updatecategory', [CategoryController::class, 'updatecategory'])->name('updatecategory');
+Route::get('/delete_category/{id}', [CategoryController::class, 'deletecategory'])->name('deletecategory');
 
 Route::get('/addslider', [SliderController::class, 'addslider']);
 Route::get('/sliders', [SliderController::class, 'sliders']);
