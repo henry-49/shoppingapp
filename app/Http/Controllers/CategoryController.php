@@ -50,8 +50,10 @@ class CategoryController extends Controller
         ]);
 
         $category = Category::find($request->input('id'));
+
         $category->category_name = $request->input('category_name');
-        $category->save();
+
+        $category->update();
 
        return back()->with('status', 'The category name was updated successfully.');
     }
