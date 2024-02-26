@@ -32,18 +32,25 @@ use Inertia\Inertia;
 
 Route::get('/admin', [AdminController::class, 'admin']);
 
-Route::get('/addcategory', [CategoryController::class, 'addcategory'])->name('addcategory');
-Route::post('/savecategory', [CategoryController::class, 'savecategory'])->name('savecategory');
-Route::get('/categories', [CategoryController::class, 'categories'])->name('categories');
-Route::get('/edit_category/{id}', [CategoryController::class, 'editcategory'])->name('editcategory');
-Route::post('/updatecategory', [CategoryController::class, 'updatecategory'])->name('updatecategory');
-Route::get('/delete_category/{id}', [CategoryController::class, 'deletecategory'])->name('deletecategory');
+// CategoryController group routes
+Route::controller(CategoryController::class)->group(function ()  {
+    Route::get('/addcategory', 'addcategory');
+    Route::post('/savecategory',  'savecategory');
+    Route::get('/categories',  'categories');
+    Route::get('/edit_category/{id}',  'editcategory');
+    Route::post('/updatecategory',  'updatecategory');
+    Route::get('/delete_category/{id}',  'deletecategory');
+});
 
 Route::get('/addslider', [SliderController::class, 'addslider']);
 Route::get('/sliders', [SliderController::class, 'sliders']);
 
 Route::get('/addproduct', [ProductController::class, 'addproduct']);
 Route::get('/products', [ProductController::class, 'products']);
+Route::post('/saveproduct', [ProductController::class, 'saveproduct'])->name('saveproduct');
+Route::get('/edit_product/{id}', [ProductController::class, 'editproduct']);
+Route::post('/updateproduct', [ProductController::class, 'updateproduct'])->name('updateproduct');
+Route::get('/delete_product/{id}', [ProductController::class, 'deleteproduct']);
 
 Route::get('/', [ClientController::class, 'home']);
 Route::get('/shop', [ClientController::class, 'shop'])->name('shop');

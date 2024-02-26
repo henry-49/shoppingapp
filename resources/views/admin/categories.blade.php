@@ -3,7 +3,7 @@
 
 @section('content')
 
-    {{Form::hidden('', $increment = 1)}}
+    {!! Form::hidden('', $increment = 1) !!}
 
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

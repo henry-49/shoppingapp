@@ -58,6 +58,7 @@
                   {{ html()->form('POST', '/savecategory')->open() }}
 
                     {{csrf_field()}}
+
                 <div class="card-body">
                   <div class="form-group">
                     {{Form::label('', 'Category Name')}}
