@@ -13,7 +13,7 @@ class ProductController extends Controller
     // list all products
     public function products()
     {
-        $products = Product::all()->where('status', 1);
+        $products = Product::all();
 
         return view('admin.products', compact('products'));
     }
@@ -139,13 +139,36 @@ class ProductController extends Controller
 
     }
 
+    public function activate_product($id)
+    {
+        $product = Product::find($id);
+        $product->status = 1;
+        $product->update();
+
+        return back()->with('status', 'The product has been activated successfully.');
+    }
+
+    public function unactivate_product($id)
+    {
+
+        $product = Product::find($id);
+        $product->status = 0;
+
+        $product->update();
+
+        return back()->with('status', 'The product has been deactivated successfully.');
+    }
+
+    
 
    /*  public function validateImage(Request $request) {
         $request->validate([
             'product_image' => 'image|nullable|mimes:jpg,jpeg,png|max:1999',
         ]);
 
-
         return redirect()->back();
     } */
+
+
+
 }

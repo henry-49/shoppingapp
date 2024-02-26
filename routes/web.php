@@ -51,6 +51,10 @@ Route::post('/saveproduct', [ProductController::class, 'saveproduct'])->name('sa
 Route::get('/edit_product/{id}', [ProductController::class, 'editproduct']);
 Route::post('/updateproduct', [ProductController::class, 'updateproduct'])->name('updateproduct');
 Route::get('/delete_product/{id}', [ProductController::class, 'deleteproduct']);
+Route::get('/unactivate_product/{id}', [ProductController::class, 'unactivate_product']);
+Route::get('/activate_product/{id}', [ProductController::class, 'activate_product']);
+
+
 
 Route::get('/', [ClientController::class, 'home']);
 Route::get('/shop', [ClientController::class, 'shop'])->name('shop');
