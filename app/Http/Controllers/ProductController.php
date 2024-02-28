@@ -28,13 +28,12 @@ class ProductController extends Controller
 
     public function saveproduct(Request $request)
     {
-        //dd($request->input("product_image"));
 
          $request->validate([
             'product_name' => 'required',
             'product_price' => 'required',
             'product_category' => 'required',
-            'mimes:jpeg,png,jpg|nullable|max:1999',
+            'product_image' => 'mimes:jpeg,png,jpg|nullable|max:1999',
         ]);
 
         if ($request->hasFile('product_image')) {
@@ -159,7 +158,7 @@ class ProductController extends Controller
         return back()->with('status', 'The product has been deactivated successfully.');
     }
 
-    
+
 
    /*  public function validateImage(Request $request) {
         $request->validate([

@@ -44,6 +44,13 @@ Route::controller(CategoryController::class)->group(function ()  {
 
 Route::get('/addslider', [SliderController::class, 'addslider']);
 Route::get('/sliders', [SliderController::class, 'sliders']);
+Route::post('/saveslider', [SliderController::class, 'saveslider'])->name('saveslider');
+Route::get('/edit_slider/{id}', [SliderController::class, 'editslider']);
+Route::post('/updateslider', [SliderController::class, 'updateslider'])->name('updateslider');
+Route::get('/delete_slider/{id}', [SliderController::class, 'deleteslider']);
+Route::get('/unactivate_slider/{id}', [SliderController::class, 'unactivate_slider']);
+Route::get('/activate_slider/{id}', [SliderController::class, 'activate_slider']);
+
 
 Route::get('/addproduct', [ProductController::class, 'addproduct']);
 Route::get('/products', [ProductController::class, 'products']);

@@ -31,7 +31,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add slider</h3>
+                <h3 class="card-title">Edit slider</h3>
               </div>
 
                @if(Session::has('status'))
@@ -55,20 +55,22 @@
               <!-- /.card-header -->
               <!-- form start -->
               {{-- <form > --}}
-                {!! Form::open(['route' => 'saveslider', "method" => "post", "class" => "form", "id" => "createUserForm", 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(['route' => 'updateslider', "method" => "post", "class" => "form", "id" => "createUserForm", 'enctype' => 'multipart/form-data']) !!}
 
                     {{csrf_field()}}
 
                 <div class="card-body">
                   <div class="form-group">
+                    {{Form::hidden('id', $slider->id)}}
+
                         {!! Form::label("description_1", "Slider description 1") !!}
-                        {!! Form::text("description_1", old('description_1'), ['class' => 'form-control','placeholder' => 'Enter slider description one']) !!}
+                        {!! Form::text("description_1", $slider->description_1, ['class' => 'form-control','placeholder' => 'Enter slider description one']) !!}
                 </div>
                   <div class="form-group">
                     {!! Form::label("description_2", "Slider description 2") !!}
-                        {!! Form::text("description_2", old('description_2'), ['class' => 'form-control','placeholder' => 'Enter slider description two']) !!}
+                        {!! Form::text("description_2", $slider->description_2, ['class' => 'form-control','placeholder' => 'Enter slider description two']) !!}
                   </div>
-                  <label for="exampleInputFile">Slider image <span class="text-danger">*</span></label>
+                  <label for="exampleInputFile">Slider image</label>
                   <div class="input-group">
                     <div class="custom-file">
                     {{-- {!! Form::file('stock_image[]', ['multiple' => true]) !!} --}}
@@ -81,7 +83,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                  {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                 </div>
                 {!! Form::close() !!}
               {{-- </form> --}}
