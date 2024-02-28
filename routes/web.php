@@ -32,14 +32,36 @@ use Inertia\Inertia;
 
 Route::get('/admin', [AdminController::class, 'admin']);
 
-Route::get('/addcategory', [CategoryController::class, 'addcategory']);
-Route::get('/categories', [CategoryController::class, 'categories']);
+// CategoryController group routes
+Route::controller(CategoryController::class)->group(function ()  {
+    Route::get('/addcategory', 'addcategory');
+    Route::post('/savecategory',  'savecategory');
+    Route::get('/categories',  'categories');
+    Route::get('/edit_category/{id}',  'editcategory');
+    Route::post('/updatecategory',  'updatecategory');
+    Route::get('/delete_category/{id}',  'deletecategory');
+});
 
 Route::get('/addslider', [SliderController::class, 'addslider']);
 Route::get('/sliders', [SliderController::class, 'sliders']);
+Route::post('/saveslider', [SliderController::class, 'saveslider'])->name('saveslider');
+Route::get('/edit_slider/{id}', [SliderController::class, 'editslider']);
+Route::post('/updateslider', [SliderController::class, 'updateslider'])->name('updateslider');
+Route::get('/delete_slider/{id}', [SliderController::class, 'deleteslider']);
+Route::get('/unactivate_slider/{id}', [SliderController::class, 'unactivate_slider']);
+Route::get('/activate_slider/{id}', [SliderController::class, 'activate_slider']);
+
 
 Route::get('/addproduct', [ProductController::class, 'addproduct']);
 Route::get('/products', [ProductController::class, 'products']);
+Route::post('/saveproduct', [ProductController::class, 'saveproduct'])->name('saveproduct');
+Route::get('/edit_product/{id}', [ProductController::class, 'editproduct']);
+Route::post('/updateproduct', [ProductController::class, 'updateproduct'])->name('updateproduct');
+Route::get('/delete_product/{id}', [ProductController::class, 'deleteproduct']);
+Route::get('/unactivate_product/{id}', [ProductController::class, 'unactivate_product']);
+Route::get('/activate_product/{id}', [ProductController::class, 'activate_product']);
+
+
 
 Route::get('/', [ClientController::class, 'home']);
 Route::get('/shop', [ClientController::class, 'shop'])->name('shop');

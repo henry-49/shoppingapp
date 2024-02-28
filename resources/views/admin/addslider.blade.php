@@ -33,23 +33,46 @@
               <div class="card-header">
                 <h3 class="card-title">Add slider</h3>
               </div>
+
+               @if(Session::has('status'))
+                    <div class="alert alert-success">
+                        {{Session::get('status')}}
+                        {{Session::put('status', null)}}
+                    </div>
+                 @endif
+
+
+              @if (count($errors) > 0)
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+                </div>
+              @endif
+
               <!-- /.card-header -->
               <!-- form start -->
-              <form >
+              {{-- <form > --}}
+                {!! Form::open(['route' => 'saveslider', "method" => "post", "class" => "form", "id" => "createUserForm", 'enctype' => 'multipart/form-data']) !!}
+
+                    {{csrf_field()}}
+
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Slider description 1</label>
-                    <input type="text" name="description1" class="form-control" id="exampleInputEmail1" placeholder="Enter slider description">
-                  </div>
+                        {!! Form::label("description_1", "Slider description 1") !!}
+                        {!! Form::text("description_1", old('description_1'), ['class' => 'form-control','placeholder' => 'Enter slider description one']) !!}
+                </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Slider description 2</label>
-                    <input type="text" name="description2" class="form-control" id="exampleInputEmail1" placeholder="Enter slider description">
+                    {!! Form::label("description_2", "Slider description 2") !!}
+                        {!! Form::text("description_2", old('description_2'), ['class' => 'form-control','placeholder' => 'Enter slider description two']) !!}
                   </div>
-                  <label for="exampleInputFile">Slider image</label>
+                  <label for="exampleInputFile">Slider image <span class="text-danger">*</span></label>
                   <div class="input-group">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="exampleInputFile">
-                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    {{-- {!! Form::file('stock_image[]', ['multiple' => true]) !!} --}}
+                      {!! Form::file('slider_image', ['class'=>'form-control']) !!}
                     </div>
                     <div class="input-group-append">
                       <span class="input-group-text">Upload</span>
@@ -58,10 +81,10 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <!-- <button type="submit" class="btn btn-warning">Submit</button> -->
-                  <input type="submit" class="btn btn-primary" value="Save" >
+                  {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                 </div>
-              </form>
+                {!! Form::close() !!}
+              {{-- </form> --}}
             </div>
             <!-- /.card -->
             </div>

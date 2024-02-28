@@ -3,19 +3,19 @@
 
 @section('content')
 
- <!-- Content Wrapper. Contains page content -->
+  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Category</h1>
+            <h1>Slider</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Category</li>
+              <li class="breadcrumb-item active">Slider</li>
             </ol>
           </div>
         </div>
@@ -31,10 +31,10 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add category</small></h3>
+                <h3 class="card-title">Edit slider</h3>
               </div>
 
-                 @if(Session::has('status'))
+               @if(Session::has('status'))
                     <div class="alert alert-success">
                         {{Session::get('status')}}
                         {{Session::put('status', null)}}
@@ -54,24 +54,38 @@
 
               <!-- /.card-header -->
               <!-- form start -->
-              {{-- <form> --}}
-                  {{ html()->form('POST', '/savecategory')->open() }}
+              {{-- <form > --}}
+                {!! Form::open(['route' => 'updateslider', "method" => "post", "class" => "form", "id" => "createUserForm", 'enctype' => 'multipart/form-data']) !!}
 
                     {{csrf_field()}}
 
                 <div class="card-body">
                   <div class="form-group">
-                    {{Form::label('', 'Category Name')}}
-                    {{ html()->text('category_name')->class('form-control')
-                            ->id('category_name')->placeholder('Enter Category Name') }}
+                    {{Form::hidden('id', $slider->id)}}
+
+                        {!! Form::label("description_1", "Slider description 1") !!}
+                        {!! Form::text("description_1", $slider->description_1, ['class' => 'form-control','placeholder' => 'Enter slider description one']) !!}
+                </div>
+                  <div class="form-group">
+                    {!! Form::label("description_2", "Slider description 2") !!}
+                        {!! Form::text("description_2", $slider->description_2, ['class' => 'form-control','placeholder' => 'Enter slider description two']) !!}
+                  </div>
+                  <label for="exampleInputFile">Slider image</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                    {{-- {!! Form::file('stock_image[]', ['multiple' => true]) !!} --}}
+                      {!! Form::file('slider_image', ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                 {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+                  {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
                 </div>
-                {{ html()->form()->close() }}
+                {!! Form::close() !!}
               {{-- </form> --}}
             </div>
             <!-- /.card -->
@@ -89,18 +103,10 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
 @endsection
 
-
 @section('scripts')
-
-<!-- jquery-validation -->
-<script src="{{ asset('backend/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('backend/plugins/jquery-validation/additional-methods.min.js') }}"></script>
-
-<!-- AdminLTE App -->
-<script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
 
 <script>
 $(function () {
@@ -148,5 +154,4 @@ $(function () {
   });
 });
 </script>
-
 @endsection

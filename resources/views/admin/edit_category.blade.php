@@ -31,7 +31,7 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add category</small></h3>
+                <h3 class="card-title">Edit category</small></h3>
               </div>
 
                  @if(Session::has('status'))
@@ -55,21 +55,23 @@
               <!-- /.card-header -->
               <!-- form start -->
               {{-- <form> --}}
-                  {{ html()->form('POST', '/savecategory')->open() }}
+                  {{ html()->form('POST', '/updatecategory')->open() }}
 
                     {{csrf_field()}}
-
                 <div class="card-body">
                   <div class="form-group">
+
+                      {{Form::hidden('id', $category->id)}}
+
                     {{Form::label('', 'Category Name')}}
-                    {{ html()->text('category_name')->class('form-control')
+                    {{ html()->text('category_name', $category->category_name)->class('form-control')
                             ->id('category_name')->placeholder('Enter Category Name') }}
                   </div>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                 {{Form::submit('Save', ['class' => 'btn btn-primary'])}}
+                 {{Form::submit('Update', ['class' => 'btn btn-primary'])}}
                 </div>
                 {{ html()->form()->close() }}
               {{-- </form> --}}
