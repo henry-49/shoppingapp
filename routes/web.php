@@ -60,10 +60,10 @@ Route::post('/updateproduct', [ProductController::class, 'updateproduct'])->name
 Route::get('/delete_product/{id}', [ProductController::class, 'deleteproduct']);
 Route::get('/unactivate_product/{id}', [ProductController::class, 'unactivate_product']);
 Route::get('/activate_product/{id}', [ProductController::class, 'activate_product']);
+Route::get('/view_product_by_category/{category_name}', [ProductController::class, 'view_product_by_category']);
 
 
-
-Route::get('/', [ClientController::class, 'home']);
+Route::get('/', [ClientController::class, 'home'])->name('home');
 Route::get('/shop', [ClientController::class, 'shop'])->name('shop');
 Route::get('/cart', [ClientController::class, 'cart'])->name('cart');
 Route::get('/checkout', [ClientController::class, 'checkout'])->name('checkout');
