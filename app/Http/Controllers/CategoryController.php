@@ -46,7 +46,7 @@ class CategoryController extends Controller
     public function updatecategory(Request $request)
     {
         $this->validate($request, [
-            'category_name' => 'required|unique:categories|max:25',
+            'category_name' => 'required|max:25',
         ]);
 
         $category = Category::find($request->input('id'));
