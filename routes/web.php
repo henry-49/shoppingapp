@@ -66,6 +66,7 @@ Route::get('/view_product_by_category/{category_name}', [ProductController::clas
 Route::get('/', [ClientController::class, 'home'])->name('home');
 Route::get('/shop', [ClientController::class, 'shop'])->name('shop');
 Route::get('/cart', [ClientController::class, 'cart'])->name('cart');
+Route::get('/add_to_cart/{id}', [ClientController::class, 'addtocart'])->name('addtocart');
 Route::get('/checkout', [ClientController::class, 'checkout'])->name('checkout');
 Route::get('/login', [ClientController::class, 'login'])->name('login');
 Route::get('/signup', [ClientController::class, 'signup'])->name('signup');
