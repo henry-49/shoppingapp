@@ -39,7 +39,7 @@
                                 @if (Session::has('cart'))
                                     @foreach ($products as $product)
                                         <tr class="text-center">
-                                                <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                                <td class="product-remove"><a href="{{url('/remove_from_cart/'.$product['product_id'])}}"><span class="ion-ios-close"></span></a></td>
 
                                                 <td class="image-prod"><div class="img" style="background-image:url(/storage/product_images/{{$product['product_image']}});"></div></td>
 
@@ -126,7 +126,7 @@
     					<hr>
     					<p class="d-flex total-price">
     						<span>Total</span>
-    						<span>${{Session::get('cart')->totalPrice}}</span>
+    						<span>${{Session::has('cart') ? Session::get('cart')->totalPrice : null}}</span>
     					</p>
     				</div>
     				<p><a href="{{ url('/checkout') }}" class="btn btn-primary py-3 px-4">{{__('Proceed to Checkout')}}</a></p>

@@ -68,6 +68,7 @@ Route::get('/shop', [ClientController::class, 'shop'])->name('shop');
 Route::get('/cart', [ClientController::class, 'cart'])->name('cart');
 Route::get('/add_to_cart/{id}', [ClientController::class, 'addtocart'])->name('addtocart');
 Route::post('/update_qty/{id}', [ClientController::class, 'updateqty'])->name('updateqty');
+Route::get('/remove_from_cart/{id}', [ClientController::class, 'removeFromCart'])->name('removeFromCart');
 Route::get('/checkout', [ClientController::class, 'checkout'])->name('checkout');
 Route::get('/login', [ClientController::class, 'login'])->name('login');
 Route::get('/signup', [ClientController::class, 'signup'])->name('signup');

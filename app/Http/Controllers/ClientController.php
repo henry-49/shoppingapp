@@ -60,7 +60,7 @@ class ClientController extends Controller
     {
         if(!Session::has('cart')){
 
-            return redirect('/cart');
+            return view('client.cart');
         }
 
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -88,5 +88,21 @@ class ClientController extends Controller
     public function orders()
     {
         return view('admin.orders');
+    }
+
+    public function removeFromCart($product_id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($product_id);
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+
+        //dd(Session::get('cart'));
+        return redirect()->route('cart');
     }
 }
