@@ -49,15 +49,17 @@
                                                 </td>
 
                                                 <td class="price">${{$product['product_price']}}</td>
-                                                <form action="">
+                                                <form action="{{url('/update_qty/'.$product['product_id'])}}" method="POST">
+
+                                                    {{ csrf_field() }}
+
                                                     <td class="quantity">
                                                         <div class="input-group mb-3">
-                                                        <input type="number" name="quantity" class="quantity form-control input-number" value="{{$product['qty']}}" min="1" max="100">
-                                                    </div>
+                                                            <input type="number" name="quantity" class="quantity form-control input-number" value="{{$product['qty']}}" min="1" max="100">
+                                                        </div>
+                                                        <input type="submit" class="btn btn-success" value="validate"/>
+                                                    </td>
                                                 </form>
-
-
-                                                </td>
 
                                                 <td class="total">${{$product['qty'] * $product['product_price']}}</td>
                                         </tr><!-- END TR-->
@@ -127,7 +129,7 @@
     						<span>${{Session::get('cart')->totalPrice}}</span>
     					</p>
     				</div>
-    				<p><a href="{{ url('/checkout') }}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+    				<p><a href="{{ url('/checkout') }}" class="btn btn-primary py-3 px-4">{{__('Proceed to Checkout')}}</a></p>
     			</div>
     		</div>
 			</div>

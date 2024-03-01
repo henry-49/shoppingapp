@@ -44,7 +44,7 @@ class Cart
         $this->items[$product_id] = $storedItem;
     }
 
-    /* public function updateQty($id, $qty)
+    public function updateQty($id, $qty)
     {
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['product_price'] * $this->items[$id]['qty'];
@@ -53,7 +53,7 @@ class Cart
         $this->totalPrice += $this->items[$id]['product_price'] * $qty;
     }
 
-    public function removeItem($id)
+   /*  public function removeItem($id)
     {
         $this->totalQty -= $this->items[$id]['qty'];
         $this->totalPrice -= $this->items[$id]['product_price'] * $this->items[$id]['qty'];
