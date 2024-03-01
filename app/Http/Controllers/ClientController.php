@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
@@ -28,13 +30,48 @@ class ClientController extends Controller
         return view('client.shop', compact('categories', 'products'));
     }
 
+
+    public function addtocart($id)
+    {
+        $product = Product::find($id);
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $id);
+        Session::put('cart', $cart);
+
+        // dd(Session::get('cart'));
+        return back();
+    }
+
+    public function updateqty(Request $request, $id)
+    {
+        //print('the product id is '.$request->id.' And the product qty is '.$request->quantity);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->updateQty($id, $request->quantity);
+        Session::put('cart', $cart);
+
+        //dd(Session::get('cart'));
+        return back();
+    }
+
     public function cart()
     {
-        return view('client.cart');
+        if(!Session::has('cart')){
+
+            return view('client.cart');
+        }
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        return view('client.cart', ['products' => $cart->items]);
     }
 
     public function checkout()
     {
+
         return view('client.checkout');
     }
 
@@ -51,5 +88,21 @@ class ClientController extends Controller
     public function orders()
     {
         return view('admin.orders');
+    }
+
+    public function removeFromCart($product_id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($product_id);
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+
+        //dd(Session::get('cart'));
+        return redirect()->route('cart');
     }
 }
