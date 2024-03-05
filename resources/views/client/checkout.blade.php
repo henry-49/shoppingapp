@@ -21,8 +21,11 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-xl-7 ftco-animate">
-				<form action="#" class="billing-form">
-					<h3 class="mb-4 billing-heading">Billing Details</h3>
+				<form action="{{url('/postcheckout')}}" method="POST" class="billing-form">
+
+                    {{csrf_field()}}
+
+                    <h3 class="mb-4 billing-heading">Billing Details</h3>
 					<div class="row align-items-end">
 						<div class="col-md-12">
 							<div class="form-group">
@@ -36,7 +39,7 @@
 							<input type="text" class="form-control"  name="address">
 							</div>
 						</div>
-						<div class="col-md-12">
+					{{-- 	<div class="col-md-12">
 							<div class="form-group">
 								<label for="lastname">Name on Card</label>
 							<input type="text" class="form-control" id="card-name" name="card_name">
@@ -65,7 +68,7 @@
 								<label for="lastname">CVC</label>
 							<input type="text" id="card-cvc" class="form-control">
 							</div>
-						</div>
+						</div> --}}
 						<div class="col-md-12">
 							<div class="form-group">
 							<input type="submit" class="btn btn-primary" value="Buy Now">

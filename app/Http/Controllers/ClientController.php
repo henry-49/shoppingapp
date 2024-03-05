@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Models\Category;
 use App\Models\Client;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -71,12 +72,33 @@ class ClientController extends Controller
         return view('client.cart', ['products' => $cart->items]);
     }
 
+     public function removeFromCart($product_id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->removeItem($product_id);
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+
+        //dd(Session::get('cart'));
+        return redirect()->route('cart');
+    }
+
     public function checkout()
     {
 
         if(!Session::has('client')){
 
             return view('client.login');
+        }
+
+        if (!Session::has('cart')) {
+
+            return view('client.cart');
         }
 
         return view('client.checkout');
@@ -143,25 +165,42 @@ class ClientController extends Controller
         }
     }
 
+    public function postcheckout(Request $request)
+    {
+
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+
+        $order = new Order();
+
+        $order->name = $request->input('name');
+
+        $order->address = $request->input('address');
+
+        $order->cart = serialize($cart);
+
+
+       $order->save();
+
+        // clear cart and empty cart
+        Session::forget('cart');
+
+        return redirect('/cart')->with('status', 'Your purchase has been  successfully completed.');
+    }
 
     public function orders()
     {
-        return view('admin.orders');
+        $orders = Order::all();
+
+         $orders->transform(function ($order ,$key){
+
+            $order->cart = unserialize($order->cart);
+
+            return $order;
+        });
+
+        return view('admin.orders', compact('orders'));
     }
 
-    public function removeFromCart($product_id)
-    {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
-        $cart->removeItem($product_id);
 
-        if (count($cart->items) > 0) {
-            Session::put('cart', $cart);
-        } else {
-            Session::forget('cart');
-        }
-
-        //dd(Session::get('cart'));
-        return redirect()->route('cart');
-    }
 }
