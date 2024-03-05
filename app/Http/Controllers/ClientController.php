@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Models\Category;
+use App\Models\Client;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
@@ -72,6 +74,11 @@ class ClientController extends Controller
     public function checkout()
     {
 
+        if(!Session::has('client')){
+
+            return view('client.login');
+        }
+
         return view('client.checkout');
     }
 
@@ -80,10 +87,62 @@ class ClientController extends Controller
         return view('client.login');
     }
 
+    public function logout()
+    {
+        Session::forget('client');
+
+        return redirect()->route('shop');
+    }
+
     public function signup()
     {
         return view('client.signup');
     }
+
+    public function create_account(Request $request)
+    {
+        $request->validate([
+            'email' => 'email|required|unique:clients',
+            'password' => 'required|min:4'
+        ]);
+
+        $client = new Client();
+        $client->email = $request->input('email');
+        $client->password = bcrypt($request->input('password'));
+
+        $client->save();
+
+        return back()->with('status', 'Your account has been  successfully created.');
+    }
+
+    public function access_account(Request $request)
+    {
+        $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+
+        $client = Client::where('email', $request->input('email'))->first();
+
+        if($client){
+
+            if(Hash::check($request->input('password'), $client->password)){
+
+                Session::put('client', $client);
+
+                return redirect('/shop');
+
+            }else{
+
+                return back()->with('status', 'Wrong email or password.');
+            }
+        }
+        else{
+
+            return back()->with('status', 'You don\'t  have an account with this email.');
+        }
+    }
+
 
     public function orders()
     {

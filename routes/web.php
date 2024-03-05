@@ -72,7 +72,11 @@ Route::get('/remove_from_cart/{id}', [ClientController::class, 'removeFromCart']
 Route::get('/checkout', [ClientController::class, 'checkout'])->name('checkout');
 Route::get('/login', [ClientController::class, 'login'])->name('login');
 Route::get('/signup', [ClientController::class, 'signup'])->name('signup');
+Route::post('/create_account', [ClientController::class, 'create_account'])->name('create_account');
+Route::post('/access_account', [ClientController::class, 'access_account'])->name('access_account');
+Route::get('/logout', [ClientController::class, 'logout'])->name('logout');
 Route::get('/orders', [ClientController::class, 'orders'])->name('orders');
+
 
 /* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
