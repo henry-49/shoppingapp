@@ -75,6 +75,7 @@ Route::get('/signup', [ClientController::class, 'signup'])->name('signup');
 Route::post('/create_account', [ClientController::class, 'create_account'])->name('create_account');
 Route::post('/access_account', [ClientController::class, 'access_account'])->name('access_account');
 Route::get('/logout', [ClientController::class, 'logout'])->name('logout');
+Route::post('/postcheckout', [ClientController::class, 'postcheckout'])->name('postcheckout');
 Route::get('/orders', [ClientController::class, 'orders'])->name('orders');
 
 

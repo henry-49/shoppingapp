@@ -65,9 +65,13 @@
                                         </tr><!-- END TR-->
                                     @endforeach
                                 @else
-
+                                     @if(Session::has('status'))
+                                        <div class="alert alert-success">
+                                            {{Session::get('status')}}
+                                            {{Session::put('status', null)}}
+                                        </div>
+                                    @endif
                                 @endif
-
 						    </tbody>
 						  </table>
 					  </div>
