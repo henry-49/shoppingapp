@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SliderController;
@@ -77,6 +78,10 @@ Route::post('/access_account', [ClientController::class, 'access_account'])->nam
 Route::get('/logout', [ClientController::class, 'logout'])->name('logout');
 Route::post('/postcheckout', [ClientController::class, 'postcheckout'])->name('postcheckout');
 Route::get('/orders', [ClientController::class, 'orders'])->name('orders');
+
+
+// view PDF
+Route::get('/view_pdf_order/{id}', [PdfController::class, 'view_pdf'])->name('view_pdf_order');
 
 
 /* Route::get('/dashboard', function () {

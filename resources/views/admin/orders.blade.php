@@ -9,12 +9,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Ordes</h1>
+            <h1>Orders</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Ordes</li>
+              <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+              <li class="breadcrumb-item active">Orders</li>
             </ol>
           </div>
         </div>
@@ -28,8 +28,15 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">All Ordes</h3>
+                <h3 class="card-title">All Orders</h3>
               </div>
+
+                 @if(Session::has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{Session::get('error')}}
+                    </div>
+                 @endif
+
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
@@ -55,7 +62,7 @@
 
                             </td>
                             <td>
-                            <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></a>
+                            <a href="{{url('/view_pdf_order/'.$order->id)}}" class="btn btn-primary"><i class="nav-icon fas fa-eye"></i></a>
                             </td>
                     </tr>
                     @endforeach
