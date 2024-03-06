@@ -85,6 +85,6 @@ By default, the application will be accessible at http://localhost:8000.
 
 Open your web browser and visit the URL where the application is served (http://localhost:8000 by default). You should see the ShoppingApp up and running.
 
-## TODO: Integrate PayPal|Credit Card Payments and Send Email Notification
+## TODO: Integrate PayPal | Stripe  Payments and Send Email Notification
 
-Integrate PayPal and Credit Card payment gateways into the project.
+Integrate PayPal and Stripe payment gateways into the project.
