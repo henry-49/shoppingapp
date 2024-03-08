@@ -77,6 +77,7 @@ Route::post('/create_account', [ClientController::class, 'create_account'])->nam
 Route::post('/access_account', [ClientController::class, 'access_account'])->name('access_account');
 Route::get('/logout', [ClientController::class, 'logout'])->name('logout');
 Route::post('/postcheckout', [ClientController::class, 'postcheckout'])->name('postcheckout');
+Route::get('/payment_success', [ClientController::class, 'payment_success'])->name('payment_success');
 Route::get('/orders', [ClientController::class, 'orders'])->name('orders');
 
 
